@@ -7,6 +7,6 @@ urlpatterns=[
     path('',views.index,name='index'),
     path('data-access2',views.dataRender2,name='index'),
     path('khans',new.khan,name='khan'),
-    path('html1',views.htmlPage,name='html_page2'),
-    path('html2',views.htmlPage1,name='ecom'),
+    path('html1',views.htmlPage,name='html_page1'),
+    path('html2',views.htmlPage1,name='html_page2'),
 ]

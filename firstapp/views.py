@@ -14,6 +14,5 @@ def htmlPage(request):
 def htmlPage1(request):
     return render(request,'home2.html')
 
-
 def new():
     return None

@@ -1,22 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Item List</title>
-</head>
-<body>
-    <h1>Item List</h1>
-    <ul>
-        {% for item in items %}
-            <li>
-                <strong>{{ item.name }}</strong>
-                <a href="{% url 'item_detail' item.id %}">View</a>
-                <a href="{% url 'update_item' item.id %}">Edit</a>
-                <a href="{% url 'delete_item' item.id %}">Delete</a>
-            </li>
-        {% endfor %}
-    </ul>
-    <a href="{% url 'create_item' %}">Create New Item</a>
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block title %}Item List{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>Item List</h2>
+        <a href="{% url 'create_item' %}" class="btn btn-success">+ Create New Item</a>
+    </div>
+
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Created At</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in items %}
+            <tr>
+                <td>{{ item.name }}</td>
+                <td>{{ item.description|truncatewords:10 }}</td>
+                <td>{{ item.created_at|date:"Y-m-d H:i" }}</td>
+                <td>
+                    <a href="{% url 'item_detail' item.id %}" class="btn btn-info btn-sm">View</a>
+                    <a href="{% url 'update_item' item.id %}" class="btn btn-warning btn-sm">Edit</a>
+                    <a href="{% url 'delete_item' item.id %}" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4" class="text-center text-muted">No items available.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
