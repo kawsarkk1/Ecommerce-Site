@@ -9,5 +9,6 @@ urlpatterns = [
     path('product/',include('product.urls')),
     path('crudapp/', include('crudapp.urls')),
     path('category/',include('category.urls')),
-    path('',simpleviews.htmlPage,name='html_page2'),
+    path('',simpleviews.htmlpage,name='html_page2'),
+    path('accounts/', include('accounts.urls')),
 ]

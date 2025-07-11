@@ -1,11 +1,32 @@
-<h1>Tag</h1>
-<a href="{% url 'tag_create' %}">Add New Tag</a>
-<ul>
-    {% for tag in tags %}
-        <li>
-            {{ tag.name }}
-            <a href="{% url 'tag_update' tag.pk %}">Edit</a>
-            <a href="{% url 'tag_delete' tag.pk %}">Delete</a>
-        </li>
-    {% endfor %}
-</ul>
+{% extends "base.html" %}
+
+{% block title %}Tag List{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Tags</h2>
+        <a href="{% url 'tag_create' %}" class="btn btn-success">+ Add New Tag</a>
+    </div>
+
+    <div class="row">
+        {% for tag in tags %}
+        <div class="col-md-4 mb-3">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">{{ tag.name }}</h5>
+                    <div class="d-flex justify-content-between mt-3">
+                        <a href="{% url 'tag_update' tag.pk %}" class="btn btn-warning btn-sm">Edit</a>
+                        <a href="{% url 'tag_delete' tag.pk %}" class="btn btn-danger btn-sm">Delete</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12">
+            <div class="alert alert-info text-center">No tags available.</div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
